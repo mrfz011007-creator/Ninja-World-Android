@@ -1,0 +1,25 @@
+# Godot generated editor/import cache
+game/.godot/
+.godot/
+
+# Generated game builds and exports
+game/build/
+build/
+export.cfg
+*.apk
+*.aab
+*.pck
+
+# Editor/OS temp files
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*export_credentials.cfg
