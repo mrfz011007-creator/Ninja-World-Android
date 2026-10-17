@@ -35,6 +35,8 @@ def main() -> None:
 
     if 'run/main_scene="res://scenes/main.tscn"' not in project:
         fail("Godot main scene path is not configured.")
+    if "textures/vram_compression/import_etc2_astc=true" not in project:
+        fail("Android ETC2/ASTC texture import must be enabled.")
     if 'path="res://scripts/main.gd"' not in scene:
         fail("Main scene does not reference the world script.")
     if 'name="Android"' not in preset or 'platform="Android"' not in preset:
@@ -47,7 +49,7 @@ def main() -> None:
         fail("Workflow does not upload the APK artifact.")
 
     print(f"PASS: {len(REQUIRED_FILES)} required project files are present.")
-    print("PASS: main scene, Android preset, and APK workflow are configured.")
+    print("PASS: main scene, Android preset, texture import, and APK workflow are configured.")
 
 
 if __name__ == "__main__":
