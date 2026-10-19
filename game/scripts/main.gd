@@ -93,6 +93,18 @@ func _create_tree(world_position: Vector3, variant: int) -> void:
 	tree.position = world_position
 	add_child(tree)
 
+	# The trunk needs a physics body; the visual mesh alone does not block the player.
+	var trunk_body := StaticBody3D.new()
+	trunk_body.name = "TrunkCollision"
+	tree.add_child(trunk_body)
+	var trunk_collision := CollisionShape3D.new()
+	var trunk_shape := CylinderShape3D.new()
+	trunk_shape.radius = 0.28
+	trunk_shape.height = 1.8
+	trunk_collision.shape = trunk_shape
+	trunk_collision.position.y = 0.9
+	trunk_body.add_child(trunk_collision)
+
 	var bark := StandardMaterial3D.new()
 	bark.albedo_color = Color("#65452e")
 	bark.roughness = 1.0
@@ -139,6 +151,11 @@ func _build_gate() -> void:
 
 
 func _create_box(world_position: Vector3, box_size: Vector3, color: Color) -> void:
+	# Use the same dimensions for the visible gate piece and its collider.
+	var body := StaticBody3D.new()
+	body.position = world_position
+	add_child(body)
+
 	var box_instance := MeshInstance3D.new()
 	var box_mesh := BoxMesh.new()
 	box_mesh.size = box_size
@@ -147,8 +164,13 @@ func _create_box(world_position: Vector3, box_size: Vector3, color: Color) -> vo
 	material.roughness = 0.9
 	box_mesh.material = material
 	box_instance.mesh = box_mesh
-	box_instance.position = world_position
-	add_child(box_instance)
+	body.add_child(box_instance)
+
+	var collision := CollisionShape3D.new()
+	var collision_shape := BoxShape3D.new()
+	collision_shape.size = box_size
+	collision.shape = collision_shape
+	body.add_child(collision)
 
 
 func _spawn_player() -> void:
