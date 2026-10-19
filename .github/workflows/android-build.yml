@@ -6,7 +6,7 @@ on:
       - "**"
   pull_request:
     branches:
-      - main
+      - "**"
   workflow_dispatch:
 
 permissions:
@@ -89,6 +89,9 @@ jobs:
 
       - name: Smoke-test main scene
         run: godot --headless --path game --quit-after 3
+
+      - name: Test tree and gate collision
+        run: godot --headless --path game --script res://tests/collision_smoke.gd
 
       - name: Export Android debug APK
         run: |
