@@ -80,7 +80,7 @@ func _run() -> void:
 		return
 
 	var tree_probe_ok: bool = await _probe_collision(
-		world, "TreeCollisionProbe", Vector3(-8.0, 0.85, -4.0),
+		world, "TreeCollisionProbe", Vector3(-8.0, 1.0, -4.0),
 		Vector3(0.0, 0.0, -5.0), "tree"
 	)
 	if not tree_probe_ok:
@@ -88,7 +88,7 @@ func _run() -> void:
 		return
 
 	var gate_probe_ok: bool = await _probe_collision(
-		world, "GateCollisionProbe", Vector3(0.0, 0.85, -11.0),
+		world, "GateCollisionProbe", Vector3(0.0, 1.0, -11.0),
 		Vector3(3.0, 0.0, 0.0), "gate"
 	)
 	if not gate_probe_ok:
