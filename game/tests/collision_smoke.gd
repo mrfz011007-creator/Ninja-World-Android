@@ -11,7 +11,11 @@ func _run() -> void:
 		quit(1)
 		return
 
-	var world := packed_scene.instantiate()
+	var world := packed_scene.instantiate() as Node3D
+	if world == null:
+		push_error("FAIL: Main scene root is not a Node3D.")
+		quit(1)
+		return
 	root.add_child(world)
 	await process_frame
 
